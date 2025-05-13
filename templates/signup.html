@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body { font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; }
+    .auth-container { background: white; padding: 100px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center; }
+    h1 { color: #333; }
+    form { display: flex; flex-direction: column; }
+    input, button { margin: 10px 0; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #007bff; color: white; cursor: pointer; }
+    .hidden-messages { display: none; }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <h1>E5</h1>
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+
+        <div>
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+
+        <div>
+            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+        </div>
+
+        <div>
+            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+        </div>
+        <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}" style="margin-left: 10px;">Login</a></p>
+  </div>
+</body>
+</html>

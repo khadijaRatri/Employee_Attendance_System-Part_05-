@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monthly Work Summary</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #3498db;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: auto;
+            overflow-x: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9f5ff;
+        }
+
+        .btn-upload , .back-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+
+        }
+
+        .btn-upload:hover {
+            background-color: #2980b9;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Monthly Work Summary</h1>
+    <section>
+      <div>
+        <a href="{% url 'export_monthly_summary_csv' %}"
+           class="btn btn-success"
+           style="margin: 0 auto 20px; display: block; text-align: center; width: fit-content;">
+           Export as CSV
+        </a>
+      </div>
+    </section>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Username</th>
+                    <th>Month</th>
+                    <th>Total Working Hours</th>
+                    <th>Total Overtime Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in summary %}
+                    <tr>
+                        <td>{{ item.employee__employee_id }}</td>
+                        <td>{{ item.employee__user__username }}</td>
+                        <td>{{ item.month|date:"F Y" }}</td>
+                        <td>{{ item.total_working_hours|floatformat:2 }}</td>
+                        <td>{{ item.total_overtime_hours|floatformat:2 }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">No attendance records found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="center">
+        <br>
+        <a href="{% url 'dashboard' %}" class="back-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

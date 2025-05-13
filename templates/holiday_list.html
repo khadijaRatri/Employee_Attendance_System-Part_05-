@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holidays</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Button Links */
+        .button-container {
+            text-align: center;
+        }
+
+        a {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Centered Container */
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h1>Holiday List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for holiday in holidays %}
+                <tr>
+                    <td>{{ holiday.date }}</td>
+                    <td>{{ holiday.name }}</td>
+                    <td class="actions">
+                        <a href="{% url 'holiday_delete' holiday.pk %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="button-container">
+            <a href="{% url 'add_holiday' %}">Add Holiday</a>
+            <a href="{% url 'dashboard' %}">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

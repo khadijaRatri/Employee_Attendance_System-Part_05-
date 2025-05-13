@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Records</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #3498db;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: auto;
+            overflow-x: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9f5ff;
+        }
+
+        .btn-upload {
+            display: block; /* block korle pura row use kore */
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            width: fit-content;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+    .btn-upload:hover {
+       background-color: #2980b9;
+    }
+    </style>
+</head>
+<body>
+    <h1>Recent Attendance Records</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Shift</th>
+                    <th>Working Hours</th>
+                    <th>Overtime Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for att in attendances %}
+                <tr>
+                    <td>{{ att.employee}}</td>
+                    <td>{{ att.date }}</td>
+                    <td>{{ att.status }}</td>
+                    <td>{{ att.check_in }}</td>
+                    <td>{{ att.check_out }}</td>
+                    <td>{{ att.shift }}</td>
+                    <td>{{ att.working_hours|default:"-" }}</td> <!-- New -->
+                    <td>{{ att.overtime_hours|default:"-" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <section>
+      <div>
+        <a href="{% url 'monthly_summary' %}" class="btn-upload">Monthly Work Summary</a>
+      </div>
+    </section>
+</body>
+</html>

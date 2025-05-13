@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Employee</title>
+    <style>
+        /* Base Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* Confirmation Box */
+        .delete-container {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        /* Heading */
+        .delete-container h2 {
+            margin-bottom: 15px;
+            color: #dc3545;
+        }
+        /* Paragraph */
+        .delete-container p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        /* Buttons */
+        .delete-container button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .delete-container button:hover {
+            background-color: #0056b3;
+        }
+        .delete-container a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: 1px solid #007BFF;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .delete-container a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="delete-container">
+        <h2>Delete Employee</h2>
+        <p>Are you sure you want to delete <strong>{{ employee.first_name }} {{ employee.last_name }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Yes, Delete</button>
+            <a href="{% url 'employee_list' %}">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
